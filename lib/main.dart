@@ -7,7 +7,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Tugas 3 - Hitung Volume',
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: Colors.blue[800],
+        primaryColor: const Color.fromARGB(255, 91, 165, 250),
         scaffoldBackgroundColor: Colors.grey[100],
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.blue[800],
@@ -70,7 +69,6 @@ class FormulaCard extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,7 +211,7 @@ class _KubusPageState extends State<KubusPage> {
   }
 }
 
-// --- HALAMAN BOLA ---
+// --- HITUNG BOLA ---
 class BolaPage extends StatefulWidget {
   const BolaPage({super.key});
   @override
@@ -224,7 +222,6 @@ class _BolaPageState extends State<BolaPage> {
   final TextEditingController _jariController = TextEditingController();
   double _result = 0;
   bool _isCalculated = false;
-
   void _hitung() {
     double r = double.tryParse(_jariController.text) ?? 0;
     if (r > 0) {
@@ -291,7 +288,7 @@ class _BolaPageState extends State<BolaPage> {
   }
 }
 
-// --- HALAMAN TABUNG ---
+// --- HITUNG TABUNG ---
 class TabungPage extends StatefulWidget {
   const TabungPage({super.key});
   @override
