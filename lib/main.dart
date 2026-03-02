@@ -67,3 +67,84 @@ class FormulaCard extends StatelessWidget {
     );
   }
 }
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Tugas Praktikum Adinda")),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              "Hitung Volume Bangun Ruang",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[900],
+              ),
+            ),
+            const SizedBox(height: 25),
+            _buildMenuCard(
+              context,
+              "Kubus",
+              Icons.view_in_ar,
+              const KubusPage(),
+            ),
+            _buildMenuCard(
+              context,
+              "Bola",
+              Icons.radio_button_unchecked,
+              const BolaPage(),
+            ),
+            _buildMenuCard(
+              context,
+              "Tabung",
+              Icons.view_column_sharp,
+              const TabungPage(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuCard(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Widget target,
+  ) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.blue[800], size: 30),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => target),
+        ),
+      ),
+    );
+  }
+}
