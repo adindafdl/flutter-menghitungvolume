@@ -37,17 +37,26 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildMenu(BuildContext context, String title, IconData icon, Widget target) {
+  Widget _buildMenu(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Widget target,
+  ) {
     return Card(
       child: ListTile(
         leading: Icon(icon, color: Colors.blue),
         title: Text(title),
         trailing: const Icon(Icons.chevron_right),
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => target)),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => target),
+        ),
       ),
     );
   }
 }
+
 // Hitung Kubus
 class KubusPage extends StatefulWidget {
   const KubusPage({super.key});
@@ -74,11 +83,65 @@ class _KubusPageState extends State<KubusPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(controller: _sisiController, decoration: const InputDecoration(labelText: "Masukkan Sisi (s)"), keyboardType: TextInputType.number),
+            TextField(
+              controller: _sisiController,
+              decoration: const InputDecoration(labelText: "Masukkan Sisi (s)"),
+              keyboardType: TextInputType.number,
+            ),
             const SizedBox(height: 20),
             ElevatedButton(onPressed: _hitung, child: const Text("Hitung")),
             const SizedBox(height: 20),
-            Text("Hasil: $_result", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              "Hasil: $_result",
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// --- Hitung Bola ---
+class BolaPage extends StatefulWidget {
+  const BolaPage({super.key});
+  @override
+  State<BolaPage> createState() => _BolaPageState();
+}
+
+class _BolaPageState extends State<BolaPage> {
+  final TextEditingController _jariController = TextEditingController();
+  double _result = 0;
+
+  void _hitung() {
+    double r = double.tryParse(_jariController.text) ?? 0;
+    setState(() {
+      _result = (4 / 3) * pi * pow(r, 3);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Volume Bola")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _jariController,
+              decoration: const InputDecoration(
+                labelText: "Masukkan Jari-jari (r)",
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(onPressed: _hitung, child: const Text("Hitung")),
+            const SizedBox(height: 20),
+            Text(
+              "Hasil: ${_result.toStringAsFixed(2)}",
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),
