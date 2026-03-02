@@ -148,3 +148,231 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+class KubusPage extends StatefulWidget {
+  const KubusPage({super.key});
+  @override
+  State<KubusPage> createState() => _KubusPageState();
+}
+
+class _KubusPageState extends State<KubusPage> {
+  final TextEditingController _sisiController = TextEditingController();
+  double _result = 0;
+  bool _isCalculated = false;
+
+  void _hitung() {
+    double s = double.tryParse(_sisiController.text) ?? 0;
+    if (s > 0) {
+      setState(() {
+        _result = pow(s, 3).toDouble();
+        _isCalculated = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Volume Kubus")),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
+            const FormulaCard(formula: "V = s³"),
+            TextField(
+              controller: _sisiController,
+              decoration: const InputDecoration(
+                labelText: "Masukkan Sisi (s)",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.straighten),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 25),
+            ElevatedButton(
+              onPressed: _hitung,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[800],
+                foregroundColor: Colors.white,
+              ),
+              child: const Text("Hitung Volume"),
+            ),
+            const SizedBox(height: 35),
+            if (_isCalculated)
+              Text(
+                "Hasil: ${_result.toStringAsFixed(2)} cm³",
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// --- HALAMAN BOLA ---
+class BolaPage extends StatefulWidget {
+  const BolaPage({super.key});
+  @override
+  State<BolaPage> createState() => _BolaPageState();
+}
+
+class _BolaPageState extends State<BolaPage> {
+  final TextEditingController _jariController = TextEditingController();
+  double _result = 0;
+  bool _isCalculated = false;
+
+  void _hitung() {
+    double r = double.tryParse(_jariController.text) ?? 0;
+    if (r > 0) {
+      setState(() {
+        _result = (4 / 3) * pi * pow(r, 3);
+        _isCalculated = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Volume Bola")),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
+            const FormulaCard(formula: "V = 4/3 x π x r³"),
+            TextField(
+              controller: _jariController,
+              decoration: const InputDecoration(
+                labelText: "Masukkan Jari-jari (r)",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.circle_outlined),
+                suffixText: "cm",
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 25),
+            ElevatedButton.icon(
+              onPressed: _hitung,
+              icon: const Icon(Icons.done),
+              label: const Text("Hitung Volume"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[800],
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 50),
+              ),
+            ),
+            const SizedBox(height: 35),
+            if (_isCalculated) _buildResultDisplay(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildResultDisplay() {
+    return Card(
+      color: Colors.blue[50],
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(
+          "Hasil: ${_result.toStringAsFixed(2)} cm³",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue[900],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// --- HALAMAN TABUNG ---
+class TabungPage extends StatefulWidget {
+  const TabungPage({super.key});
+  @override
+  State<TabungPage> createState() => _TabungPageState();
+}
+
+class _TabungPageState extends State<TabungPage> {
+  final TextEditingController _rController = TextEditingController();
+  final TextEditingController _tController = TextEditingController();
+  double _result = 0;
+  bool _isCalculated = false;
+
+  void _hitung() {
+    double r = double.tryParse(_rController.text) ?? 0;
+    double t = double.tryParse(_tController.text) ?? 0;
+    if (r > 0 && t > 0) {
+      setState(() {
+        _result = pi * pow(r, 2) * t;
+        _isCalculated = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Volume Tabung")),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
+            const FormulaCard(formula: "V = π x r² x t"),
+            TextField(
+              controller: _rController,
+              decoration: const InputDecoration(
+                labelText: "Jari-jari Alas (r)",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.circle_outlined),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 15),
+            TextField(
+              controller: _tController,
+              decoration: const InputDecoration(
+                labelText: "Tinggi Tabung (t)",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.height),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 25),
+            ElevatedButton.icon(
+              onPressed: _hitung,
+              icon: const Icon(Icons.done),
+              label: const Text("Hitung Volume"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[800],
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 50),
+              ),
+            ),
+            const SizedBox(height: 35),
+            if (_isCalculated)
+              Card(
+                color: Colors.blue[50],
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    "Hasil: ${_result.toStringAsFixed(2)} cm³",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[900],
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
