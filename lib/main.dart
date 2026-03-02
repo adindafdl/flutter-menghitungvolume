@@ -48,3 +48,40 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+// Hitung Kubus
+class KubusPage extends StatefulWidget {
+  const KubusPage({super.key});
+  @override
+  State<KubusPage> createState() => _KubusPageState();
+}
+
+class _KubusPageState extends State<KubusPage> {
+  final TextEditingController _sisiController = TextEditingController();
+  double _result = 0;
+
+  void _hitung() {
+    double s = double.tryParse(_sisiController.text) ?? 0;
+    setState(() {
+      _result = pow(s, 3).toDouble();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Volume Kubus")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(controller: _sisiController, decoration: const InputDecoration(labelText: "Masukkan Sisi (s)"), keyboardType: TextInputType.number),
+            const SizedBox(height: 20),
+            ElevatedButton(onPressed: _hitung, child: const Text("Hitung")),
+            const SizedBox(height: 20),
+            Text("Hasil: $_result", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+}
