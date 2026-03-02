@@ -102,7 +102,7 @@ class _KubusPageState extends State<KubusPage> {
   }
 }
 
-// --- Hitung Bola ---
+// Hitung Bola
 class BolaPage extends StatefulWidget {
   const BolaPage({super.key});
   @override
@@ -142,6 +142,46 @@ class _BolaPageState extends State<BolaPage> {
               "Hasil: ${_result.toStringAsFixed(2)}",
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+// Hitung Tabung
+class TabungPage extends StatefulWidget {
+  const TabungPage({super.key});
+  @override
+  State<TabungPage> createState() => _TabungPageState();
+}
+
+class _TabungPageState extends State<TabungPage> {
+  final TextEditingController _rController = TextEditingController();
+  final TextEditingController _tController = TextEditingController();
+  double _result = 0;
+
+  void _hitung() {
+    double r = double.tryParse(_rController.text) ?? 0;
+    double t = double.tryParse(_tController.text) ?? 0;
+    setState(() {
+      _result = pi * pow(r, 2) * t;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Volume Tabung")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(controller: _rController, decoration: const InputDecoration(labelText: "Masukkan Jari-jari (r)"), keyboardType: TextInputType.number),
+            TextField(controller: _tController, decoration: const InputDecoration(labelText: "Masukkan Tinggi (t)"), keyboardType: TextInputType.number),
+            const SizedBox(height: 20),
+            ElevatedButton(onPressed: _hitung, child: const Text("Hitung")),
+            const SizedBox(height: 20),
+            Text("Hasil: ${_result.toStringAsFixed(2)}", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
