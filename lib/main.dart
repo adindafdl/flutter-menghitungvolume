@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Kalkulator Volume UMS',
+      title: 'Tugas 3 - Hitung Volume',
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: Colors.blue[800],
@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tugas Praktikum Adinda")),
+      appBar: AppBar(title: const Text("Aplikasi Hitung Volume")),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
